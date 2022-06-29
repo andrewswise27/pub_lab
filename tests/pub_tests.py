@@ -27,11 +27,15 @@ class TestPub(unittest.TestCase):
         self.assertEqual("Carling", drink.name)
 
     def test_can_sell_drink_to_customer(self):
-        customer = Customer("Stephen", 1000.00)
-        self.pub.sell_drink_to_customer("Carling", customer)
-        self.assertEqual(995.00, customer.wallet)
-        self.assertEqual(105.00, self.pub.till)
-        self.assertEqual(1, self.pub.drinks_sold)
+        customer = Customer("Stephen", 1000.00, 51)
+        if customer.age >= 18:
+            self.pub.sell_drink_to_customer("Carling", customer)
+            self.assertEqual(995.00, customer.wallet)
+            self.assertEqual(105.00, self.pub.till)
+            self.assertEqual(1, self.pub.drinks_sold)
+        else:
+            print("Sorry mate, youre too young!")
+
 
     
     
