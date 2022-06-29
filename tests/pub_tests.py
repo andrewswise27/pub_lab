@@ -7,8 +7,8 @@ from src.customer import Customer
 class TestPub(unittest.TestCase):
     
     def setUp(self):
-        self.drink = Drink("Carling", 5.00)
-        self.drink2 = Drink("Rosé", 7.50)
+        self.drink = Drink("Carling", 5.00, 1.8)
+        self.drink2 = Drink("Rosé", 7.50, 3.5)
         drink = [self.drink, self.drink2]
 
         self.pub = Pub("The Prancing Pony", 100.00, drink)
@@ -28,11 +28,12 @@ class TestPub(unittest.TestCase):
 
     def test_can_sell_drink_to_customer(self):
         customer = Customer("Stephen", 1000.00, 51)
-        if customer.age >= 18:
+        if customer.age >= 18 and customer.drunkenness < 9.0:
             self.pub.sell_drink_to_customer("Carling", customer)
             self.assertEqual(995.00, customer.wallet)
             self.assertEqual(105.00, self.pub.till)
             self.assertEqual(1, self.pub.drinks_sold)
+            self.assertEqual(1.8, customer.drunkenness)
         else:
             print("Sorry mate, youre too young!")
 

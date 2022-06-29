@@ -20,4 +20,5 @@ class Pub:
         drink = self.find_drink_by_name(name)
         customer.reduce_wallet(drink.price)
         self.increase_drinks_sold()
+        customer.increase_drunkenness(drink.alcohol_level)
         self.increase_till(drink.price)
